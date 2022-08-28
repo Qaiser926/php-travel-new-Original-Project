@@ -46,6 +46,7 @@ dependencies:
 #  device_preview: ^1.1.0
   input_slider: ^0.3.0
   url_strategy: ^0.2.0
+  easy_localization: ^3.0.1
 
 
 dev_dependencies:
@@ -73,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - images/
+     - jsonfile/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

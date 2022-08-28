@@ -52,7 +52,16 @@ class _FeatureTourDataState extends State<FeatureTourData> {
                   },
                   // itemCount:controller.modal.value.featuredFlights!.length ,
                   itemBuilder: (context, index){
-
+                    if (controller.isLoading.value) {
+                      return Center(child: const CircularProgressIndicator());
+                    }
+                    if (controller.isEmptyData.value) {
+                      return Center(
+                          child: InkWell(
+                            onTap: () {},
+                            child:  Text("nodatafoundtext".tr),
+                          ));
+                    }
                     final item=controller.modal.value.featuredTours;
 
                     return Stack(
@@ -162,32 +171,32 @@ class _FeatureTourDataState extends State<FeatureTourData> {
             )
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 25,right: 25,bottom: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  width:Get.size.width*0.12,
-                  height:Get.size.height*0.12,
-                  decoration:BoxDecoration(shape:BoxShape.circle,color:TColor.mainColor.withOpacity(0.7)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed: (){
-                      pageController.jumpToPage(currentIndex-1);
-                    }, icon: Icon(Icons.arrow_back_ios  )),
-                  )),
-              Container(
-                  width:Get.size.width*0.12,
-                  height:Get.size.height*0.12,
-                  decoration:BoxDecoration(shape:BoxShape.circle,color:TColor.mainColor.withOpacity(0.9)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(onPressed: (){ pageController.jumpToPage(currentIndex+1);}, icon: Icon(Icons.arrow_forward_ios  )),
-                  )),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              margin: EdgeInsets.only(left: 25,bottom: 35),
+                width:Get.size.width*0.12,
+                height:Get.size.height*0.12,
+                decoration:BoxDecoration(shape:BoxShape.circle,color:TColor.mainColor.withOpacity(0.9)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(onPressed: (){
+                    pageController.jumpToPage(currentIndex-1);
+                  }, icon: Icon(Icons.arrow_back_ios  )),
+                )),
+            Container(
+                margin: EdgeInsets.only(right: 25,bottom: 35),
+                width:Get.size.width*0.12,
+                height:Get.size.height*0.12,
+                decoration:BoxDecoration(shape:BoxShape.circle,color:TColor.mainColor.withOpacity(0.9)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: IconButton(onPressed: (){ pageController.jumpToPage(currentIndex+1);},
+                      icon: Icon(Icons.arrow_forward_ios  )),
+                )),
 
-            ],
-          ),
+          ],
         )
       ],
     );

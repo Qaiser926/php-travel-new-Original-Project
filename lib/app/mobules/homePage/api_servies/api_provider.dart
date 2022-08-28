@@ -126,6 +126,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' as rootBundle;
 import 'package:get/get.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:http/http.dart' as http;
@@ -134,19 +135,62 @@ import 'dart:convert' as convert;
 
 import '../HomeModel/homePageModelClass.dart';
 
+/*
+
+class ApiProvider {
+  // var response=
+  final String url2 = "https://randomuser.me/api/?results=10";
+  final String url = 'https://phptravels.net/api/api/main/app?appKey=phptravels&lang=en&currency=usd';
+
+  List<HomeOfferListModelClass> _postList = <HomeOfferListModelClass>[];
+
+  static Future<HomeOfferListModelClass?> getUserData() async {
+      var url2=Uri.parse("https://randomuser.me/api/?results=10");
+      var url = Uri.parse("https://demotravels.com/api/api/main/app?appKey=phptravels&lang=en&currency=usd");
+      var response = await http.get(
+        Uri.parse('https://phptravels.net/api/api/main/app?appKey=phptravels&lang=en&currency=usd'),
+        // headers: headers,
+      );
+      // print(response.body);
+      final requestbody = json.decode(response.body.toString());
+      print(requestbody.runtimeType);
+      try {
+        if (response.body==200) {
+          print('yaha tak to tike he ');
+          return homeOfferListModelClassFromJson(response.body);
+        }else if (response.body.isNotEmpty) {
+          print('yaha b tik he pir error kaha he');
+          return homeOfferListModelClassFromJson(response.body.toString());
+          // return homeOfferListModelClassFromJson(requestbody);
+        } else {
+          // show_snackBarError(title: "Error", description: "Oops, server is down");
+          Get.snackbar('error', 'oop connection error');
+          print('yaha par data nhe he ');
+          return null;
+        }
+      }
+      on PlatformException catch (e) {
+        // print(e);
+        // show_snackBarError(title: "Error", description: e.message.toString());
+        print('dirct yaha par q ata he');
+        Get.snackbar('Error', 'yaha par error he ${e.toString()}');
+      }
+      catch (e) {
+        print('dirct yaha par q ata he');
+        print('yaha catch me error he ${e}');
+      }
+    }
+
+
+}*/
+
 
 class ApiProvider {
   // var response=
   final String url2="https://randomuser.me/api/?results=10";
   final String url='https://phptravels.net/api/api/main/app?appKey=phptravels&lang=en&currency=usd';
 
-
-
-
   List<HomeOfferListModelClass> _postList =<HomeOfferListModelClass>[];
-
-
-
   static Future<HomeOfferListModelClass?> getUserData() async {
     var url2=Uri.parse("https://randomuser.me/api/?results=10");
     var url = Uri.parse("https://demotravels.com/api/api/main/app?appKey=phptravels&lang=en&currency=usd");
@@ -170,8 +214,6 @@ class ApiProvider {
         Get.snackbar('error', 'oop connection error');
         print('yaha par data nhe he ');
         return null;
-
-
       }
     }
     on PlatformException catch (e) {

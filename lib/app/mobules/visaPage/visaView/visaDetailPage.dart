@@ -316,7 +316,7 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
       decoration: BoxDecoration(
         // color: TColor.mainColor,
           border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(6)),
       child: ListTile(
         onTap: () {
           homecontroler.chooseDatetime();
@@ -344,7 +344,7 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
       height: Get.size.height * 0.06,
       minWidth: double.infinity,
       color: TColor.mainblueColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       onPressed: () {},
       child: Text(
         'Search',
@@ -364,7 +364,7 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
         // color: color,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

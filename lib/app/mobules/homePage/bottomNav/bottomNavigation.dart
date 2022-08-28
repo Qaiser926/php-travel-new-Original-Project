@@ -18,13 +18,10 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
 
   static  List<Widget> _widgetOptions = <Widget>[
     HomeViewPage(),
-    HotelSearchPage(),
-    VisaSearchPage (),
-    TourSearchPage(),
 
-    // Text('Search Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    // Text('travel', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    // Text('Profile Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Search Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('travel', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    Text('Profile Page', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
   ];
 
   void _onItemTapped(int index) {

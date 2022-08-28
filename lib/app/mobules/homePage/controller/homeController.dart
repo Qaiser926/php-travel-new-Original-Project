@@ -131,6 +131,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' as rootBundle;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:phptravelapp/app/mobules/homePage/HomeModel/homePageModelClass.dart';
@@ -141,6 +142,8 @@ import 'package:phptravelapp/app/mobules/homePage/bottomNav/bottomNavigation.dar
 
 // class HomeController extends GetxController with StateMixin<List<dynamic>> {
 // class HomeController extends GetxController with StateMixin<List<dynamic>>{
+/*
+
 class HomeController extends GetxController {
   RxInt currentIndex = 0.obs;
 
@@ -148,22 +151,16 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var modal = HomeOfferListModelClass().obs;
   var isEmptyData = false.obs;
-
   List<TourAppModel> modelDataList=List<TourAppModel>.empty().obs;
-
 
   List<Widget> homeViewWidget = [
     BottomNavigationBarPage()
   ];
-
-
   @override
   void onInit() {
     super.onInit();
-
     fatchProductList();
   }
-
   fatchProductList() async {
     // print("tapped $id");
     try {
@@ -211,9 +208,81 @@ class HomeController extends GetxController {
   //
   // }
 
-
 }
 
+*/
 
+class HomeController extends GetxController {
+  RxInt currentIndex = 0.obs;
+
+  var name = "".obs;
+  var isLoading = false.obs;
+  var modal = HomeOfferListModelClass().obs;
+  var isEmptyData = false.obs;
+
+  List<TourAppModel> modelDataList=List<TourAppModel>.empty().obs;
+
+
+  List<Widget> homeViewWidget = [
+    BottomNavigationBarPage()
+  ];
+
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    fatchProductList();
+  }
+
+  fatchProductList() async {
+    // print("tapped $id");
+    try {
+      isLoading(true);
+      var product = await ApiProvider.getUserData();
+      print(product);
+      if (product is HomeOfferListModelClass) {
+        print("data not null");
+        modal.value = product as HomeOfferListModelClass;
+        update();
+      } else {
+        isEmptyData(true);
+      }
+    } finally {
+      isLoading(false);
+    }
+  }
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+//
+//
+// fetchTourData() async{
+//
+//   List<TourAppModel> modelClass=await [
+//
+//     TourAppModel(
+//       image: 'images/hotel.svg',
+//     ),
+//     TourAppModel(
+//       image: 'images/plane.svg',
+//     ),
+//     TourAppModel(
+//       image: 'images/bus.svg',
+//     ),
+//     TourAppModel(
+//       image: 'images/visa_card.svg',
+//     ),
+//   ];
+//   modelDataList.assignAll(modelClass);
+//   print(modelClass);
+//   update();
+//
+// }
+
+
+}
 
 

@@ -21,6 +21,7 @@ class _FeatureHotelState extends State<FeatureHotel> {
     return Stack(
       children: [
         Column(
+
           children: [
             Padding(
               padding:  EdgeInsets.symmetric(horizontal: 10),
@@ -51,7 +52,16 @@ class _FeatureHotelState extends State<FeatureHotel> {
                   },
                   // itemCount:controller.modal.value.featuredFlights!.length ,
                   itemBuilder: (context, index){
-
+                    if (controller.isLoading.value) {
+                      return Center(child: const CircularProgressIndicator());
+                    }
+                    if (controller.isEmptyData.value) {
+                      return Center(
+                          child: InkWell(
+                            onTap: () {},
+                            child:  Text("nodatafoundtext".tr),
+                          ));
+                    }
                     final item=controller.modal.value.featuredHotels;
 
                     return Column(
@@ -98,7 +108,7 @@ class _FeatureHotelState extends State<FeatureHotel> {
                                 SizedBox(height: 10,),
                                 RichText(text: TextSpan(
                                     children: [
-                                      TextSpan(text: 'usdtext'.tr,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17)),
+                                      TextSpan(text: 'USD',style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 17)),
                                       TextSpan(text: '  '),
                                       TextSpan(text: item[index%controller.modal.value.featuredHotels!.length].price.toString(),style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: Colors.black)),
                                     ]

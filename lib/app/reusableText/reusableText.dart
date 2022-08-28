@@ -11,7 +11,7 @@ class commonText extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
       child: Text(
-        title,
+        title,textDirection: TextDirection.rtl,
         style: TextStyle(
           fontWeight: fontWeight,
           fontSize: size,

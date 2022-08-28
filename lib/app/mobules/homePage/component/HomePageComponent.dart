@@ -2,8 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TabComponent extends StatelessWidget {
+class TabComponent extends StatefulWidget {
 
+  @override
+  State<TabComponent> createState() => _TabComponentState();
+}
+
+class _TabComponentState extends State<TabComponent> {
   @override
   Widget build(BuildContext context) {
     return  TabBar(

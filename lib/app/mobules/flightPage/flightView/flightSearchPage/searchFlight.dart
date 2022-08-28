@@ -9,14 +9,14 @@ import 'package:phptravelapp/app/mobules/hotelPage/hotelView/hotelSearchPage/hot
 import 'package:phptravelapp/app/reusableText/reusableText.dart';
 
 
-class HotelSearchPage extends StatefulWidget {
-  const HotelSearchPage({super.key});
+class FlightPage extends StatefulWidget {
+  const FlightPage({super.key});
 
   @override
-  State<HotelSearchPage> createState() => _HotelSearchPageState();
+  State<FlightPage> createState() => _FlightPageState();
 }
 
-class _HotelSearchPageState extends State<HotelSearchPage> {
+class _FlightPageState extends State<FlightPage> {
   dynamic argumentData = Get.arguments;
 
   bool isVisible = false;
@@ -299,7 +299,7 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
       decoration: BoxDecoration(
           // color: TColor.mainColor,
           border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(6)),
       child: ListTile(
         onTap: () {
           homecontroler.chooseDateRangePicker();
@@ -349,7 +349,7 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
         // color: color,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

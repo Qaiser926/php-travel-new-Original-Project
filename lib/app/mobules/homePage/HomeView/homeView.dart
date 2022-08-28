@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:phptravelapp/app/colors.dart';
 import 'package:phptravelapp/app/mobules/homePage/component/HomePageComponent.dart';
+import 'package:phptravelapp/app/mobules/homePage/component/feature_car.dart';
 import 'package:phptravelapp/app/mobules/homePage/component/feature_tourData.dart';
 import 'package:phptravelapp/app/mobules/homePage/component/topRowIcon.dart';
 import 'package:phptravelapp/app/mobules/homePage/controller/homeController.dart';
@@ -22,6 +23,9 @@ class HomeViewPage extends GetView<HomeController>{
   final homecontroller=Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
+
+
+
     return Scaffold(
       body: DefaultTabController(
         length: 4,
@@ -30,14 +34,12 @@ class HomeViewPage extends GetView<HomeController>{
             children: [
               SizedBox(height: Get.size.height*0.04,),
               appBar(),
-              sizeBox(),
-              TabComponent(),
+              // sizeBox(),
+              // TabComponent(),
           // Obx(() =>Container(
-          //     TopRowIcon(),
+              TopRowIcon(),
 
-              SizedBox(
-                height: 10,
-              ),
+
               Align(
                   alignment: Alignment.center,
                   child: commonText(
@@ -45,9 +47,8 @@ class HomeViewPage extends GetView<HomeController>{
                     size: 25,
                     fontWeight: FontWeight.bold,
                   )),
-
-
-              // FeatureFlight(),
+              SizedBox(height: 15,),
+              FeatureFlight(),
               SizedBox(height:Get.size.height*0.01),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -69,7 +70,7 @@ class HomeViewPage extends GetView<HomeController>{
                       ),
                     ),
                     SizedBox(width: 5,),
-                    Expanded(child: Text('belowFlightdestinationText'.tr,style: TextStyle(fontSize: 12),))
+                    Expanded(child: Text('belowFlightdestinationText'.tr,style: TextStyle(fontSize: 14),))
                   ],
                 ),
               ),
@@ -87,7 +88,7 @@ class HomeViewPage extends GetView<HomeController>{
                          fontWeight: FontWeight.bold,
                        )),
 
-                   // FeatureHotel(),
+                   FeatureHotel(),
                    SizedBox(height: 20,),
                  ],
                ),
@@ -107,19 +108,21 @@ class HomeViewPage extends GetView<HomeController>{
               SizedBox(
                 height: 12,
               ),
-              // FeatureTourData(),
+              FeatureTourData(),
               SizedBox(
-                height: 10,
+                height: 13,
               ),
               Align(
                   alignment: Alignment.center,
                   child: commonText(
                     title: 'Featured Cars',
-                    size: 20,
+                    size: 25,
                     fontWeight: FontWeight.bold,
                   )),
-
-              // FeatureCars()
+              SizedBox(
+                height: 13,
+              ),
+              FeatureCar()
             ],
           ),
         ),
@@ -149,7 +152,7 @@ class HomeViewPage extends GetView<HomeController>{
                 )),
           ),
            Text(
-            'appbartitle'.tr,
+            '       ',
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w400,

@@ -587,7 +587,7 @@ class Featured {
   String? discount;
   String? address;
   int? price;
-  CurrCode? currCode;
+  dynamic? currCode;
   dynamic? inclusions;
   String? tourDays;
   String? tourNights;

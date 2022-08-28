@@ -4,6 +4,11 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:input_slider/input_slider.dart';
 import 'package:phptravelapp/app/colors.dart';
+import 'package:phptravelapp/app/mobules/tourPage/tourView/tourDetailpage.dart';
+
+
+String _selectedLang='en';
+bool selectedLang=false;
 
 class DataFilteration extends StatefulWidget {
   @override
@@ -11,18 +16,16 @@ class DataFilteration extends StatefulWidget {
 }
 
 class _DataFilterationState extends State<DataFilteration> {
-
-
-  final selectedValue = null;
-
-  List listitem = ['paksitan','india','china','landon','us','canada'];
-  var valueChose='ENGLISH';
-
+  
   final List locale=[
     {'name':'ENGLISH','locale':Locale('en','US')},
     {'name':'АНГЛИЙСКИЙ','locale':Locale('en','IS')},
     {'name':'姓名','locale':Locale('zh','CN')},
   ];
+
+
+
+ /*
   updateLanguage(Locale locale){
     Get.back();
     Get.updateLocale(locale);
@@ -31,6 +34,7 @@ class _DataFilterationState extends State<DataFilteration> {
     showDialog(context: context, builder: (builder){
 
       return
+
         AlertDialog(
         title: Text('Choose a language'),
         content: Container(
@@ -52,46 +56,10 @@ class _DataFilterationState extends State<DataFilteration> {
               itemCount: locale.length) ,
         ),
       );
-     /*   Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 10),
-          child: Container(
-            width: double.infinity,
-            height: Get.size.height*0.075,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(width: 1,color: Colors.grey)
-              // color: TColor.mainColor,
-            ),
-            child: DropdownButtonFormField(
 
-                // decoration: InputDecoration(
-                //   border: InputBorder.none,
-                //   prefixIcon: Icon(Icons.outlined_flag_outlined,color: Colors.grey,),
-                // ),
-                icon: Icon(
-                  Icons.keyboard_arrow_down,
-                  color: Colors.grey,
-                ),
-                isExpanded: true,
-                // style: TextStyle(color: TColor.mainblueColor),
-                // underline: SizedBox(),
-                // icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
-                value: valueChose,
-                items: listitem.map<DropdownMenuItem<String>>((e) {
-                  return DropdownMenuItem(
-                    child: Text(e),
-                    value: e,
-                  );
-                }).toList(),
-                onChanged: (String? value){
-                  setState((){
-                    valueChose=value!;
-                  });
-                }),
-          ),
-        );*/
+
     });
-  }
+  }*/
 
   // const DataFilteration({Key? key}) : super(key: key);
   static double _lowerValue=1.0;
@@ -106,31 +74,80 @@ class _DataFilterationState extends State<DataFilteration> {
   bool home=false;
   bool hotel=false;
   bool resort=false;
+
+  bool freebreaking=false;
+  bool freeparking=false;
+  bool pool =false;
+  bool petfriendly=false;
+  bool freewifi=false;
+
+  // void dropdowncallback(){
+  //   if(selectedValue is String){
+  //     setState((){
+  //
+  //     })
+  //   }
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        surfaceTintColor: Colors.white,
+        backgroundColor: TColor.mainColor,
+        surfaceTintColor:TColor.mainColor,
         title: Text('Filters',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400),),
         centerTitle: true,
       actions: [
-        InkWell(
-            onTap: (){
-              builddialog(context);
-            },
-            child: Text('language'))
+      Container(
+        // color: Colors.black,
+        // child: Scrollbar(
+        //   isAlwaysShown: true,
+        child: Theme(
+          data: Theme.of(context).copyWith(
+              canvasColor: Colors.black,
+          ),
+          child: DropdownButton(
+            menuMaxHeight: Get.size.height*0.3,
+              // dropdownColor: Colors.black,
+              focusColor: Colors.black,
+              style: TextStyle(color: Colors.black),
+              items: [
+
+                DropdownMenuItem(child: Text('Turkish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'turkish',),
+                DropdownMenuItem(child: Text('Rassian',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'ra',),
+                DropdownMenuItem(child: Text('Philippen',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'filipin',),
+                DropdownMenuItem(child: Text('Korean',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'korean',),
+                DropdownMenuItem(child: Text('Khmer',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'Khmer',),
+                DropdownMenuItem(child: Text('Indonesia',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'indonesia',),
+                DropdownMenuItem(child: Text('French',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'french',),
+                DropdownMenuItem(child: Text('Spanish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'spanish',),
+          DropdownMenuItem(child: Text('English',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'en',),
+    DropdownMenuItem(child: Text('German',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'german',),
+    DropdownMenuItem(child: Text('Chiness',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'chnes',),
+    DropdownMenuItem(child: Text('Arabic',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'arabic',),
+    ],
+    value: _selectedLang
+    , onChanged: (value){
+    setState((){
+    _selectedLang=value!;
+    selectedLang=true;
+    });
+    Get.updateLocale(Locale(_selectedLang));
+    }),
+        ),
+      ),
       ],
       automaticallyImplyLeading: false,
       leading: InkWell(
           onTap: (){
             Get.back();
           },
-          child: Icon(Icons.close,color: Colors.black,)),
+          child: selectedLang?Icon(Icons.arrow_back_ios):Icon(Icons.close,color: Colors.black,)),
       ),
 
       body: SingleChildScrollView(
         child: Column(
           children: [
+
             // FlutterSlider(
             //   values: [30, 420],
             //   max: 1000,
@@ -162,147 +179,203 @@ class _DataFilterationState extends State<DataFilteration> {
               ),
             ),
             SizedBox(height: 10,),
-            SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                rangeThumbShape: RoundRangeSliderThumbShape(
+            Padding(
+              padding: const EdgeInsets.all(6.0),
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  rangeThumbShape: RoundRangeSliderThumbShape(
 
-                  enabledThumbRadius: 10,
-                  // disabledThumbRadius: 10,
-                  elevation: 6
-                )
-              ),
-              child: RangeSlider(
-                labels: RangeLabels(values.start.toString(),values.end.toString()),
-                activeColor: TColor.maingreenColor,
-                inactiveColor: TColor.mainColor,
-                values:values,
-              min: _lowerValue,
-                max: _upperValue,
-                onChanged: (val){
-                setState((){
-                  print(val);
-                  values=val;
-                });
-                },
+                    enabledThumbRadius: 10,
+                    // disabledThumbRadius: 10,
+                    elevation: 6
+                  )
+                ),
+                child: RangeSlider(
+                  labels: RangeLabels(values.start.toString(),values.end.toString()),
+                  activeColor: TColor.maingreenColor,
+                  inactiveColor: TColor.mainColor,
+                  values:values,
+                min: _lowerValue,
+                  max: _upperValue,
+                  onChanged: (val){
+                  setState((){
+                    print(val);
+                    values=val;
+                  });
+                  },
+                ),
               ),
             ),
 
             commonText('Popular filters'.tr),
 
           Container(
-            // width: Get.size.width,
-            // height: Get.size.height*0.3,
+            width: Get.size.width,
+            height: Get.size.height*0.25,
             child: Column(
-
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               // direction: Axis.horizontal,
               // runSpacing: 2,
               // spacing: 2,
               // verticalDirection: VerticalDirection.up,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isCheck,
-                              onChanged: (v){
-                                setState((){
-                                  isCheck=v!;
-                                });
-                              },
-                            ),
-                            Text('Free Breakfast'.tr),
-                          ],
+                Container(
+                  width: Get.size.width*0.99,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: Get.size.width*0.48,
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: isCheck,
+                                onChanged: (v){
+                                  setState((){
+                                    isCheck=v!;
+                                  });
+                                },
+                              ),
+                              Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Text('Free Breakfast'.tr),
+                                  )),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
+                        Container(
+                          width: Get.size.width*0.48,
+                          child: Row(
 
-                          children: [
-                            Checkbox(
-                              activeColor: TColor.maingreenColor,
-                              value: isCheck,
-                              onChanged: (v){
-                                setState((){
-                                  isCheck=v!;
-                                });
-                              },
-                            ),
-                            Text('Free Parking'.tr),
-                          ],
+                            children: [
+                              Checkbox(
+                                activeColor: TColor.maingreenColor,
+                                value: isCheck,
+                                onChanged: (v){
+                                  setState((){
+                                    isCheck=v!;
+                                  });
+                                },
+                              ),
+                              Expanded(child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text('Free Parking'.tr),
+                              )),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isCheck,
-                              onChanged: (v){
-                                setState((){
-                                  isCheck=v!;
-                                });
-                              },
-                            ),
-                            Text('Pool'.tr),
-                          ],
+                Container(
+                  width: Get.size.width*0.99,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: Get.size.width*0.48,
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: isCheck,
+                                onChanged: (v){
+                                  setState((){
+                                    isCheck=v!;
+                                  });
+                                },
+                              ),
+                              Text('Pool'.tr),
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isCheck,
-                              onChanged: (v){
-                                setState((){
-                                  isCheck=v!;
-                                });
-                              },
-                            ),
-                            Text('pet Friendly'.tr),
-                          ],
+                        Container(
+                          width: Get.size.width*0.48,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                value: isCheck,
+                                onChanged: (v){
+                                  setState((){
+                                    isCheck=v!;
+                                  });
+                                },
+                              ),
+                              Expanded(child: Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text('pet Friendly'.tr),
+                              )),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              value: isCheck,
-                              onChanged: (v){
-                                setState((){
-                                  isCheck=v!;
-                                });
-                              },
-                            ),
-                            Text('Free Wifi'.tr),
-                          ],
-                        ),
-                      )
-                    ],
+                Container(
+                  width: Get.size.width*0.99,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                value: isCheck,
+                                onChanged: (v){
+                                  setState((){
+                                    isCheck=v!;
+                                  });
+                                },
+                              ),
+                              Text('Free Wifi'.tr),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
             ),
+            // child: Wrap(
+            //   direction: Axis.horizontal,
+            //   runAlignment: WrapAlignment.spaceEvenly,
+            //   children: [
+            //     CheckboxListTile(
+            //       dense: true,
+            //
+            //       controlAffinity: ListTileControlAffinity.leading,
+            //       title: Text('Free Breaking'),
+            //         value: freebreaking, onChanged: (index){
+            //           freebreaking=index!;
+            //     }
+            //     ), CheckboxListTile(    dense: true, controlAffinity: ListTileControlAffinity.leading,
+            //       title: Text('Free Breaking'),
+            //         value: freebreaking, onChanged: (index){
+            //           freebreaking=index!;
+            //     }
+            //     ), CheckboxListTile(     dense: true,controlAffinity: ListTileControlAffinity.leading,
+            //       title: Text('Free Breaking'),
+            //         value: freebreaking, onChanged: (index){
+            //           freebreaking=index!;
+            //     }
+            //     ),
+            //   ],
+            // ),
           ),
 
 
@@ -375,7 +448,7 @@ class _DataFilterationState extends State<DataFilteration> {
               title: Text('Resort'.tr),
             ),
 
-            SizedBox(height: Get.size.height*0.06,),
+            SizedBox(height: Get.size.height*0.03,),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: MaterialButton(onPressed: (){},
@@ -397,7 +470,7 @@ class _DataFilterationState extends State<DataFilteration> {
     return  Align(
         alignment: Alignment.topLeft,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 15),
           child: Text(title),
         ));
   }

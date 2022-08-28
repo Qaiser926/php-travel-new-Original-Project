@@ -303,7 +303,7 @@ Widget visibilityContainerRow(String title,Function() plusCount,String hint,Func
       decoration: BoxDecoration(
           // color: TColor.mainColor,
           border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(6)),
       child: ListTile(
         onTap: () {
           homecontroler.chooseDateRangePicker();
@@ -352,7 +352,7 @@ Widget visibilityContainerRow(String title,Function() plusCount,String hint,Func
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
         // color: color,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

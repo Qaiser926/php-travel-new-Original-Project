@@ -276,7 +276,7 @@ class _TourSearchPageState extends State<TourSearchPage> {
       decoration: BoxDecoration(
         // color: TColor.mainColor,
           border: Border.all(color: Colors.grey, width: 1),
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(6)),
       child: ListTile(
         onTap: () {
           homecontroler.chooseDatetime();
@@ -324,7 +324,7 @@ class _TourSearchPageState extends State<TourSearchPage> {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1),
         // color: color,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(6),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),

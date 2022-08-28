@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:phptravelapp/app/mobules/homePage/HomeView/homeView.dart';
 import 'package:phptravelapp/app/mobules/homePage/binding/homeBinding.dart';
+import 'package:phptravelapp/app/mobules/hotelPage/hotelView/hotelSearchPage.dart';
 import 'package:phptravelapp/app/mobules/menu_filterPage/dataFilteration.dart';
 
 import '../../app/mobules/flightPage/flightView/flightSearchPage/searchFlight.dart';
