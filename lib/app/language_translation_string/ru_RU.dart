@@ -19,7 +19,7 @@ Map<String , String> ra={
 'bottomnav3':'путешествовать',
 'bottomnav4':'человек',
 'usdtext':'доллар США',
-'nodatafoundtext':'Данные не найдены',
+'nodatafoundText':'Данные не найдены',
 'nationality':'Национальность',
 'for 1 night':"на 1 ночь",
 'Popular filters':'Популярные фильтры',

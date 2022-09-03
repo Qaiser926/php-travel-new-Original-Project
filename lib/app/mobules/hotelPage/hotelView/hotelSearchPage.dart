@@ -108,18 +108,14 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
                                 Icons.directions_walk)),
                     Stack(
                       children: [
-
                         Container(
                     margin: EdgeInsets.only(top: 40),
                         child: SearchButton()),
                         showTravellerRemoveAddVisisbiltyContainer(),
-
-
                       ],
                     )
                   ],
                 ),
-
               ],
             ),
           ),
@@ -148,7 +144,7 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
           ],
         ),
         width: Get.size.width,
-        height: Get.size.height * 0.39,
+        height: Get.size.height * 0.42,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -159,7 +155,8 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
                });
              },'${roomcout}', () {
                setState(() {
-                 roomcout--;
+                 roomcout<=0?roomcout=0:roomcout--;
+                 // roomcout--;
                });
              },Icons.bedroom_child_sharp),
               visibilityContainerRow('Adults'.tr,  () {
@@ -168,7 +165,7 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
                 });
               },'${adultCount}', () {
                 setState(() {
-                  adultCount--;
+                adultCount<=0?adultCount=0:  adultCount--;
                 });
               },Icons.person_outline_outlined),
               visibilityContainerRow('Childs'.tr,  () {
@@ -177,7 +174,7 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
                 });
               },'${childCount}', () {
                 setState(() {
-                  childCount--;
+                 childCount<=0?childCount=0: childCount--;
 
                 });
               },Icons.woman),
@@ -204,40 +201,49 @@ class _HotelSearchPageState extends State<HotelSearchPage> {
           borderRadius: BorderRadius.circular(6),
           color: TColor.mainColor,
         ),
-        child: DropdownButtonFormField(
+        child: Center(
+          child: DropdownButtonFormField(
 
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.wordpress_rounded,color: Colors.grey,),
-            ),
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.grey,
-              size: 33.0,
-            ),
-            isExpanded: true,
-            // style: TextStyle(color: TColor.mainblueColor),
-            // underline: SizedBox(),
-            // icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
-            value: valueChose,
-            items: listitem.map<DropdownMenuItem<String>>((e) {
-              return DropdownMenuItem(
-                child: Text(e),
-                value: e,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.wordpress_rounded,color: Colors.grey,),
+                ),
+              ),
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 6,bottom: 6),
+                child: Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.grey,
+                  size: 33.0,
+                ),
+              ),
+              isExpanded: true,
+              // style: TextStyle(color: TColor.mainblueColor),
+              // underline: SizedBox(),
+              // icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
+              value: valueChose,
+              items: listitem.map<DropdownMenuItem<String>>((e) {
+                return DropdownMenuItem(
+                  child: Text(e),
+                  value: e,
 
-              );
-            }).toList(),
-            onChanged: (String? value){
-              setState((){
-                valueChose=value!;
-              });
-            }),
+                );
+              }).toList(),
+              onChanged: (String? value){
+                setState((){
+                  valueChose=value!;
+                });
+              }),
+        ),
       ),
     );
   }
 Widget visibilityContainerRow(String title,Function() plusCount,String hint,Function() minusCount,IconData visibleContainerIcon){
     return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
         Container(
             child:  Row(
@@ -254,6 +260,7 @@ Widget visibilityContainerRow(String title,Function() plusCount,String hint,Func
         Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
                 Container(
                   margin: EdgeInsets.only(right: 13),
@@ -261,11 +268,12 @@ Widget visibilityContainerRow(String title,Function() plusCount,String hint,Func
                     shape: BoxShape.circle,
                     color: TColor.mainColor.withOpacity(0.6),
                   ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
+                  width: Get.size.width * 0.084,
+                  height: Get.size.height * 0.084,
                   child: InkWell(
                       onTap: minusCount,
-                      child: Icon(Icons.minimize)),
+                      child: Center(child: InkWell(
+                          child: PlusMinus(title: '-',size: 30,)))),
                 ),
                 // Container(
                 //     width: 35,
@@ -282,16 +290,11 @@ Widget visibilityContainerRow(String title,Function() plusCount,String hint,Func
                     shape: BoxShape.circle,
                     color: TColor.mainColor.withOpacity(0.6),
                   ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
-                  child: IconButton(
-                    onPressed: plusCount,
-                    splashColor: Colors.transparent,
-                    icon: const Padding(
-                      padding: const EdgeInsets.only(right: 27),
-                      child: Icon(Icons.add),
-                    ),
-                  ),
+                  width: Get.size.width * 0.084,
+                  height: Get.size.height * 0.084,
+                  child: Center(child: InkWell(
+                      onTap: plusCount,
+                      child: PlusMinus(title: '+',size: 24,)))
                 )
               ],
             )),

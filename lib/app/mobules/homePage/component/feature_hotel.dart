@@ -50,7 +50,7 @@ class _FeatureHotelState extends State<FeatureHotel> {
                       currentIndex=index%controller.modal.value.featuredHotels!.length;
                     });
                   },
-                  // itemCount:controller.modal.value.featuredFlights!.length ,
+                  // itemCount:controller.modal.value.featuredFlights.length ,
                   itemBuilder: (context, index){
                     if (controller.isLoading.value) {
                       return Center(child: const CircularProgressIndicator());

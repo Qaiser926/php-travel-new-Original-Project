@@ -1,27 +1,53 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:phptravelapp/app/language_translation_string/languageTranslation.dart';
-import 'package:phptravelapp/app/language_translation_string/localLanguageString.dart';
+import 'package:phptravelapp/app/mobules/homePage/api_servies/api_provider.dart';
 import 'package:phptravelapp/routes/app_pages/app_pages.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+import 'app/mobules/homePage/api_servies/api_provider.dart';
+import 'app/mobules/homePage/controller/homeController.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();  // language changing store karta he
+  await GetStorage.init(); // language changing store karta he
+  await Hive.initFlutter();
   setPathUrlStrategy();
   // runApp(DevicePreview(builder: (context)=>travelapp()));
   runApp(travelapp());
 }
-class travelapp extends StatelessWidget {
-  const travelapp({Key? key}) : super(key: key);
+class travelapp extends StatefulWidget {
+   travelapp({Key? key}) : super(key: key);
+
+  @override
+  State<travelapp> createState() => _travelappState();
+}
+
+class _travelappState extends State<travelapp> {
+
 
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
       // locale: DevicePreview.locale(context),
       // builder: DevicePreview.appBuilder,
+      // ye niche wala separate language class k liye
       translations: TranslationPage(),
-      locale: Locale('en'),
-      fallbackLocale: Locale('en'),
+
+
+
+    // language change k liye he
+      locale:TranslationPage().getCurrentLocale(),
+      fallbackLocale: Locale('en','US'),
+
+
+      // fallbackLocale: Locale('en'),
+      // locale: Locale('en','US'),
+      // fallbackLocale: Locale('en','US'),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           useMaterial3: true

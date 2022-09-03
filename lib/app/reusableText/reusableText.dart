@@ -20,3 +20,15 @@ class commonText extends StatelessWidget {
     );
   }
 }
+
+class PlusMinus extends StatelessWidget {
+
+  String? title;
+  double? size;
+  PlusMinus({this.title,this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(title!,style: TextStyle(fontSize: size),);
+  }
+}

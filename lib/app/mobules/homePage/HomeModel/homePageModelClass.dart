@@ -35,11 +35,11 @@ class HomeOfferListModelClass {
   Cms? cms;
   App? app;
   List<Social>? social;
-  List<Featured>? featuredHotels;
-  List<FeaturedFlight>? featuredFlights;
-  List<Featured>? featuredTours;
-  List<FeaturedCar>? featuredCars;
-  List<FeaturedBlog>? featuredBlog;
+ late List<Featured>? featuredHotels;
+  late  List<FeaturedFlight>? featuredFlights;
+  late List<Featured>? featuredTours;
+  late  List<FeaturedCar>? featuredCars;
+  late List<FeaturedBlog>? featuredBlog;
 
   factory HomeOfferListModelClass.fromJson(Map<String, dynamic> json) => HomeOfferListModelClass(
     modules: List<Module>.from(json["modules"].map((x) => Module.fromJson(x))),
@@ -699,7 +699,7 @@ class Module {
     this.order,
   });
 
-  String? name;
+  var name;
   bool? status;
   String? order;
 

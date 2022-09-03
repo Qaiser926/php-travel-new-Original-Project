@@ -45,7 +45,7 @@ class _FlightPageState extends State<FlightPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Search Hotel'),
+        title: Text('Search Flight'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -144,7 +144,7 @@ class _FlightPageState extends State<FlightPage> {
           ],
         ),
         width: Get.size.width,
-        height: Get.size.height * 0.39,
+        height: Get.size.height * 0.43,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -155,7 +155,7 @@ class _FlightPageState extends State<FlightPage> {
                 });
               },'${roomcout}', () {
                 setState(() {
-                  roomcout--;
+                 roomcout<=0?roomcout=0: roomcout--;
                 });
               },Icons.bedroom_child_sharp),
               visibilityContainerRow('Adults'.tr,  () {
@@ -164,7 +164,7 @@ class _FlightPageState extends State<FlightPage> {
                 });
               },'${adultCount}', () {
                 setState(() {
-                  adultCount--;
+                  adultCount<=0?adultCount=0: adultCount--;
                 });
               },Icons.person_outline_outlined),
               visibilityContainerRow('Childs'.tr,  () {
@@ -173,11 +173,9 @@ class _FlightPageState extends State<FlightPage> {
                 });
               },'${childCount}', () {
                 setState(() {
-                  childCount--;
-
+                  childCount<=0?childCount=0: childCount--;
                 });
               },Icons.woman),
-
               SizedBox(height: 4,),
               Align(
                   alignment: Alignment.topLeft,
@@ -200,34 +198,39 @@ class _FlightPageState extends State<FlightPage> {
           borderRadius: BorderRadius.circular(6),
           color: TColor.mainColor,
         ),
-        child: DropdownButtonFormField(
+        child: Center(
+          child: DropdownButtonFormField(
 
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              prefixIcon: Icon(Icons.wordpress_rounded,color: Colors.grey,),
-            ),
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-              color: Colors.grey,
-              size: 33.0,
-            ),
-            isExpanded: true,
-            // style: TextStyle(color: TColor.mainblueColor),
-            // underline: SizedBox(),
-            // icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
-            value: valueChose,
-            items: listitem.map<DropdownMenuItem<String>>((e) {
-              return DropdownMenuItem(
-                child: Text(e),
-                value: e,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.wordpress_rounded,color: Colors.grey,),
+              ),
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 6),
+                child: Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.grey,
+                  size: 33.0,
+                ),
+              ),
+              isExpanded: true,
+              // style: TextStyle(color: TColor.mainblueColor),
+              // underline: SizedBox(),
+              // icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
+              value: valueChose,
+              items: listitem.map<DropdownMenuItem<String>>((e) {
+                return DropdownMenuItem(
+                  child: Text(e),
+                  value: e,
 
-              );
-            }).toList(),
-            onChanged: (String? value){
-              setState((){
-                valueChose=value!;
-              });
-            }),
+                );
+              }).toList(),
+              onChanged: (String? value){
+                setState((){
+                  valueChose=value!;
+                });
+              }),
+        ),
       ),
     );
   }
@@ -240,7 +243,6 @@ class _FlightPageState extends State<FlightPage> {
               children: [
                 Icon(visibleContainerIcon,color: Colors.grey,),
                 SizedBox(width: 5,),
-
                 Text(
                   title,
                   style: TextStyle(fontSize: 15),
@@ -257,11 +259,11 @@ class _FlightPageState extends State<FlightPage> {
                     shape: BoxShape.circle,
                     color: TColor.mainColor.withOpacity(0.6),
                   ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
+                  width: Get.size.width * 0.084,
+                  height: Get.size.height * 0.084,
                   child: InkWell(
                       onTap: minusCount,
-                      child: Icon(Icons.minimize)),
+                      child: Center(child: PlusMinus(title: '-',size: 30,))),
                 ),
                 // Container(
                 //     width: 35,
@@ -278,17 +280,14 @@ class _FlightPageState extends State<FlightPage> {
                     shape: BoxShape.circle,
                     color: TColor.mainColor.withOpacity(0.6),
                   ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
-                  child: IconButton(
-                    onPressed: plusCount,
-                    splashColor: Colors.transparent,
-                    icon: const Padding(
-                      padding: const EdgeInsets.only(right: 27),
-                      child: Icon(Icons.add),
-                    ),
-                  ),
-                )
+                  width: Get.size.width * 0.084,
+                  height: Get.size.height * 0.084,
+                  child: InkWell(
+                    child: Center(child: InkWell(
+                    onTap: plusCount,
+                    child: PlusMinus(title: '+',size: 24,)),
+                  )
+                ))
               ],
             )),
       ],

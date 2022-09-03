@@ -24,8 +24,15 @@ class _DataFilterationState extends State<DataFilteration> {
   ];
 
 
+   String? selected;
+  List<Map> _mapList=[
+    {
+      'id': '1',
+      'image':""
+    }
+  ];
 
- /*
+
   updateLanguage(Locale locale){
     Get.back();
     Get.updateLocale(locale);
@@ -59,7 +66,7 @@ class _DataFilterationState extends State<DataFilteration> {
 
 
     });
-  }*/
+  }
 
   // const DataFilteration({Key? key}) : super(key: key);
   static double _lowerValue=1.0;
@@ -97,44 +104,7 @@ class _DataFilterationState extends State<DataFilteration> {
         title: Text('Filters',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w400),),
         centerTitle: true,
       actions: [
-      Container(
-        // color: Colors.black,
-        // child: Scrollbar(
-        //   isAlwaysShown: true,
-        child: Theme(
-          data: Theme.of(context).copyWith(
-              canvasColor: Colors.black,
-          ),
-          child: DropdownButton(
-            menuMaxHeight: Get.size.height*0.3,
-              // dropdownColor: Colors.black,
-              focusColor: Colors.black,
-              style: TextStyle(color: Colors.black),
-              items: [
 
-                DropdownMenuItem(child: Text('Turkish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'turkish',),
-                DropdownMenuItem(child: Text('Rassian',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'ra',),
-                DropdownMenuItem(child: Text('Philippen',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'filipin',),
-                DropdownMenuItem(child: Text('Korean',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'korean',),
-                DropdownMenuItem(child: Text('Khmer',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'Khmer',),
-                DropdownMenuItem(child: Text('Indonesia',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'indonesia',),
-                DropdownMenuItem(child: Text('French',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'french',),
-                DropdownMenuItem(child: Text('Spanish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'spanish',),
-          DropdownMenuItem(child: Text('English',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'en',),
-    DropdownMenuItem(child: Text('German',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'german',),
-    DropdownMenuItem(child: Text('Chiness',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'chnes',),
-    DropdownMenuItem(child: Text('Arabic',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'arabic',),
-    ],
-    value: _selectedLang
-    , onChanged: (value){
-    setState((){
-    _selectedLang=value!;
-    selectedLang=true;
-    });
-    Get.updateLocale(Locale(_selectedLang));
-    }),
-        ),
-      ),
       ],
       automaticallyImplyLeading: false,
       leading: InkWell(
@@ -147,6 +117,44 @@ class _DataFilterationState extends State<DataFilteration> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
+            Container(
+              // color: Colors.black,
+              // child: Scrollbar(
+              //   isAlwaysShown: true,
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  canvasColor: Colors.black,
+                ),
+                child: DropdownButton(
+                    menuMaxHeight: Get.size.height*0.3,
+                    // dropdownColor: Colors.black,
+                    focusColor: Colors.black,
+                    style: TextStyle(color: Colors.black),
+                    items: [
+                      DropdownMenuItem(child: Text('Turkish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'turkish',),
+                      DropdownMenuItem(child: Text('Rassian',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'ra',),
+                      DropdownMenuItem(child: Text('Philippen',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'filipin',),
+                      DropdownMenuItem(child: Text('Korean',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'korean',),
+                      DropdownMenuItem(child: Text('Khmer',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'Khmer',),
+                      DropdownMenuItem(child: Text('Indonesia',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'indonesia',),
+                      DropdownMenuItem(child: Text('French',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'french',),
+                      DropdownMenuItem(child: Text('Spanish',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'spanish',),
+                      DropdownMenuItem(child: Text('English',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'en',),
+                      DropdownMenuItem(child: Text('German',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'german',),
+                      DropdownMenuItem(child: Text('Chiness',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'chnes',),
+                      DropdownMenuItem(child: Text('Arabic',style: TextStyle(color: Colors.white,fontSize: 17),),value: 'arabic',),
+                    ],
+                    value: _selectedLang
+                    , onChanged: (value){
+                  setState((){
+                    _selectedLang=value!;
+                    selectedLang=true;
+                  });
+                  Get.updateLocale(Locale(_selectedLang));
+                }),
+              ),
+            ),
 
             // FlutterSlider(
             //   values: [30, 420],
@@ -167,7 +175,7 @@ class _DataFilterationState extends State<DataFilteration> {
 
            // commonText('Price ( for 1 night)'),
             SizedBox(height: 16,),
-            Padding(
+           /* Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
@@ -177,9 +185,9 @@ class _DataFilterationState extends State<DataFilteration> {
                   Text(')')
                 ],
               ),
-            ),
+            ),*/
             SizedBox(height: 10,),
-            Padding(
+          /*  Padding(
               padding: const EdgeInsets.all(6.0),
               child: SliderTheme(
                 data: SliderTheme.of(context).copyWith(
@@ -206,10 +214,10 @@ class _DataFilterationState extends State<DataFilteration> {
                 ),
               ),
             ),
+*/
+          /*  commonText('Popular filters'.tr),*/
 
-            commonText('Popular filters'.tr),
-
-          Container(
+        /*  Container(
             width: Get.size.width,
             height: Get.size.height*0.25,
             child: Column(
@@ -377,9 +385,9 @@ class _DataFilterationState extends State<DataFilteration> {
             //   ],
             // ),
           ),
-
-
-            commonText('Distance from city center'.tr),
+*/
+/*
+            commonText('Distance from city center'.tr),*/
             // InputSlider(
             //   onChange: (value) => print("change: $value"),
             //   min: 0.0,
@@ -390,9 +398,9 @@ class _DataFilterationState extends State<DataFilteration> {
             //   defaultValue: 50,
             // ),
 
-
-            commonText('Type of Accommodation'.tr),
-           SwitchListTile(
+/*
+            commonText('Type of Accommodation'.tr),*/
+          /* SwitchListTile(
              activeColor: TColor.maingreenColor,
              value: (isradio||apartment||home||hotel||resort), onChanged: (index){
              setState((){
@@ -406,8 +414,8 @@ class _DataFilterationState extends State<DataFilteration> {
              });
            },
            title: Text('All'.tr),
-           ),
-            SwitchListTile( activeColor: TColor.maingreenColor,value: (apartment), onChanged: (index){
+           ),*/
+        /*    SwitchListTile( activeColor: TColor.maingreenColor,value: (apartment), onChanged: (index){
               setState((){
 
                 isradio=index;
@@ -460,7 +468,7 @@ class _DataFilterationState extends State<DataFilteration> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               color: TColor.maingreenColor,
               ),
-            ),
+            ),*/
           ],
         ),
       ),

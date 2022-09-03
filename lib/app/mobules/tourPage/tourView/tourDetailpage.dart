@@ -187,16 +187,16 @@ class _TourSearchPageState extends State<TourSearchPage> {
                 });
               },'${adultCount}', () {
                 setState(() {
-                  adultCount--;
+                adultCount<=0?adultCount=0:  adultCount--;
                 });
               },Icons.person_outline_outlined),
               visibilityContainerRow('Childs'.tr,  () {
                 setState(() {
-                  childCount++;
+                 childCount++;
                 });
               },'${childCount}', () {
                 setState(() {
-                  childCount--;
+                  childCount<=0?childCount=0:   childCount--;
 
                 });
               },Icons.woman),
@@ -238,7 +238,8 @@ class _TourSearchPageState extends State<TourSearchPage> {
                   height: Get.size.height * 0.07,
                   child: InkWell(
                       onTap: minusCount,
-                      child: Icon(Icons.minimize)),
+                      child: Center(
+    child: PlusMinus(title: '-',size: 30,))),
                 ),
                 // Container(
                 //     width: 35,
@@ -257,13 +258,9 @@ class _TourSearchPageState extends State<TourSearchPage> {
                   ),
                   width: Get.size.width * 0.08,
                   height: Get.size.height * 0.07,
-                  child: IconButton(
-                    onPressed: plusCount,
-                    splashColor: Colors.transparent,
-                    icon: const Padding(
-                      padding: const EdgeInsets.only(right: 27),
-                      child: Icon(Icons.add),
-                    ),
+                  child: Center(child: InkWell(
+                    onTap: plusCount,
+                      child: PlusMinus(title: '+',size: 24,))
                   ),
                 )
               ],

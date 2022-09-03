@@ -1,89 +1,21 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:get/get.dart';
-//
-// class VisaSearchPage extends StatefulWidget {
-//   const VisaSearchPage({super.key});
-//
-//   @override
-//   State<VisaSearchPage> createState() => _VisaSearchPageState();
-// }
-//
-// class _VisaSearchPageState extends State<VisaSearchPage> {
-//   dynamic argumentData = Get.arguments;
-//
-//   @override
-//   void onInit() {
-//     print(argumentData[1]);
-//
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Visa Detail page'),
-//       ),
-//     );
-//   }
-// }
-
-
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/widgets/container.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-// import 'package:get/get.dart';
-//
-// class TourSearchPage extends StatefulWidget {
-//   const TourSearchPage({super.key});
-//
-//   @override
-//   State<TourSearchPage> createState() => _TourSearchPageState();
-// }
-//
-// class _TourSearchPageState extends State<TourSearchPage> {
-//   dynamic argumentData = Get.arguments;
-//
-//   @override
-//   void onInit() {
-//     print(argumentData[1]);
-//
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Tour Detail page'),
-//
-//       ),
-//
-//     );
-//   }
-// }
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:phptravelapp/app/colors.dart';
+import 'package:phptravelapp/app/mobules/hotelPage/hotelController/hotelController.dart';
+import 'package:phptravelapp/app/mobules/hotelPage/hotelView/hotelSearchPage/hotelSearchPage.dart';
 import 'package:phptravelapp/app/reusableText/reusableText.dart';
 
-import '../visaController/visaController.dart';
-
-class VisaSearchPage extends StatefulWidget {
-  const VisaSearchPage({super.key});
+class HotelSearchPage extends StatefulWidget {
+  const HotelSearchPage({super.key});
 
   @override
-  State<VisaSearchPage> createState() => _VisaSearchPageState();
+  State<HotelSearchPage> createState() => _HotelSearchPageState();
 }
 
-class _VisaSearchPageState extends State<VisaSearchPage> {
+class _HotelSearchPageState extends State<HotelSearchPage> {
   dynamic argumentData = Get.arguments;
 
   bool isVisible = false;
@@ -91,6 +23,8 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
   int childCount = 0;
   int adultCount = 2;
   int roomcout=1;
+  String Travellers='Travellers'.tr;
+  String Rooms='Rooms'.tr;
   @override
   void onInit() {
     print(argumentData[1]);
@@ -103,51 +37,154 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
   List listitem = ['paksitan','india','china','landon','us','canada'];
   var valueChose='paksitan';
 
-  final homecontroler = Get.put(TourController());
+  final homecontroler = Get.put(HotelController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Search Visa'),
+        title: Text('Search Hotel'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Container(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: commonText(title: 'City Name'.tr, size: 16)),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.to(SearchHotel());
+                  },
+                  // child: ReusableEditText(title: "Search By City"),
+                  child: travellerDropdownContainer(
+                      'Search By City'.tr, Icons.location_on_outlined),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: commonText(title: 'Check in / Check out'.tr, size: 16),
+                ),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                // calendar picker
+                rangeCalender(),
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: commonText(title: 'Travellers'.tr, size: 16),
+                ),
+
+                SizedBox(
+                  height: Get.size.height * 0.01,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        child: isVisible
+                            ? travellerDropdownContainer(
+
+                            '$Travellers ${adultCount + childCount} $Rooms ${roomcout}',
+                            Icons.directions_walk)
+                            : travellerDropdownContainer(
+
+                            '$Travellers ${adultCount + childCount} $Rooms ${roomcout}',
+                            Icons.directions_walk)),
+                    Stack(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(top: 40),
+                            child: SearchButton()),
+                        showTravellerRemoveAddVisisbiltyContainer(),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget showTravellerRemoveAddVisisbiltyContainer() {
+    return Visibility(
+      visible: isVisible,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.grey.shade200, width: 0.7),
+          borderRadius: BorderRadius.circular(8.0),
+          // color: Colors.grey.shade200.withOpacity(0.99),
+
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.transparent,
+              blurRadius: 0,
+              spreadRadius: 0.0,
+              offset: Offset(0, 0), // shadow direction: bottom right
+            )
+          ],
+        ),
+        width: Get.size.width,
+        height: Get.size.height * 0.42,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
+              visibilityContainerRow('Rooms'.tr,  () {
+                setState(() {
+                  roomcout++;
+                });
+              },'${roomcout}', () {
+                setState(() {
+                  roomcout<=0?roomcout=0:roomcout--;
+                  // roomcout--;
+                });
+              },Icons.bedroom_child_sharp),
+              visibilityContainerRow('Adults'.tr,  () {
+                setState(() {
+                  adultCount++;
+                });
+              },'${adultCount}', () {
+                setState(() {
+                  adultCount<=0?adultCount=0:  adultCount--;
+                });
+              },Icons.person_outline_outlined),
+              visibilityContainerRow('Childs'.tr,  () {
+                setState(() {
+                  childCount++;
+                });
+              },'${childCount}', () {
+                setState(() {
+                  childCount<=0?childCount=0: childCount--;
 
+                });
+              },Icons.woman),
+
+              SizedBox(height: 4,),
               Align(
                   alignment: Alignment.topLeft,
-                  child: commonText(title: 'From Country'.tr, size: 16)),
-              SizedBox(
-                height: Get.size.height * 0.0,
-              ),
+                  child: commonText(title: 'nationality'.tr,fontWeight: FontWeight.bold,size: 18,)),
+              // dropdownButton
               dropDownButton(),
-
-              SizedBox(
-                height: Get.size.height * 0.0,
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: commonText(title: 'To Country'.tr, size: 16),
-              ),
-              SizedBox(
-                height: Get.size.height * 0.0,
-              ),
-              // calendar picker
-              dropDownButton(),
-              Align(
-                alignment: Alignment.topLeft,
-                child: commonText(title: 'Date'.tr, size: 16),
-              ),
-              rangeCalender(),
-              SizedBox(
-                height: Get.size.height * 0.04,
-              ),
-
-              SearchButton()
             ],
           ),
         ),
@@ -159,24 +196,27 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
       padding: const EdgeInsets.symmetric(horizontal: 0,vertical: 10),
       child: Container(
         width: double.infinity,
-        height: Get.size.height*0.075,
+        height: Get.size.height*0.074,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            border: Border.all(width: 1,color: Colors.grey)
-          // color: TColor.mainColor,
+          borderRadius: BorderRadius.circular(6),
+          color: TColor.mainColor,
         ),
         child: Center(
           child: DropdownButtonFormField(
 
               decoration: InputDecoration(
                 border: InputBorder.none,
-                prefixIcon: Icon(Icons.outlined_flag_outlined,color: Colors.grey,),
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.wordpress_rounded,color: Colors.grey,),
+                ),
               ),
               icon: Padding(
-                padding: const EdgeInsets.only(right: 6),
+                padding: const EdgeInsets.only(right: 6,bottom: 6),
                 child: Icon(
                   Icons.keyboard_arrow_down,
                   color: Colors.grey,
+                  size: 33.0,
                 ),
               ),
               isExpanded: true,
@@ -200,62 +240,10 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
       ),
     );
   }
-  Widget showTravellerRemoveAddVisisbiltyContainer() {
-    return Visibility(
-      visible: isVisible,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey.shade200, width: 0.7),
-          borderRadius: BorderRadius.circular(8.0),
-          // color: Colors.grey.shade200.withOpacity(0.99),
-
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.transparent,
-              blurRadius: 0,
-              spreadRadius: 0.0,
-              offset: Offset(0, 0), // shadow direction: bottom right
-            )
-          ],
-        ),
-        width: Get.size.width,
-        height: Get.size.height * 0.16,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Column(
-            children: [
-
-              visibilityContainerRow('Adults'.tr,  () {
-                setState(() {
-                  adultCount++;
-                });
-              },'${adultCount}', () {
-                setState(() {
-                  adultCount--;
-                });
-              },Icons.person_outline_outlined),
-              visibilityContainerRow('Childs'.tr,  () {
-                setState(() {
-                  childCount++;
-                });
-              },'${childCount}', () {
-                setState(() {
-                  childCount--;
-
-                });
-              },Icons.woman),
-
-
-            ],
-          ),
-        ),
-      ),
-    );
-  }
   Widget visibilityContainerRow(String title,Function() plusCount,String hint,Function() minusCount,IconData visibleContainerIcon){
     return  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
       children: [
         Container(
             child:  Row(
@@ -272,6 +260,7 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
         Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
               children: [
                 Container(
                   margin: EdgeInsets.only(right: 13),
@@ -279,11 +268,12 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
                     shape: BoxShape.circle,
                     color: TColor.mainColor.withOpacity(0.6),
                   ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
+                  width: Get.size.width * 0.084,
+                  height: Get.size.height * 0.084,
                   child: InkWell(
                       onTap: minusCount,
-                      child: Icon(Icons.minimize)),
+                      child: Center(child: InkWell(
+                          child: PlusMinus(title: '-',size: 30,)))),
                 ),
                 // Container(
                 //     width: 35,
@@ -295,21 +285,16 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
                 //     )),
                 Text(hint),
                 Container(
-                  margin: EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: TColor.mainColor.withOpacity(0.6),
-                  ),
-                  width: Get.size.width * 0.08,
-                  height: Get.size.height * 0.07,
-                  child: IconButton(
-                    onPressed: plusCount,
-                    splashColor: Colors.transparent,
-                    icon: const Padding(
-                      padding: const EdgeInsets.only(right: 27),
-                      child: Icon(Icons.add),
+                    margin: EdgeInsets.only(left: 10),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: TColor.mainColor.withOpacity(0.6),
                     ),
-                  ),
+                    width: Get.size.width * 0.084,
+                    height: Get.size.height * 0.084,
+                    child: Center(child: InkWell(
+                        onTap: plusCount,
+                        child: PlusMinus(title: '+',size: 24,)))
                 )
               ],
             )),
@@ -324,7 +309,7 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
           borderRadius: BorderRadius.circular(6)),
       child: ListTile(
         onTap: () {
-          homecontroler.chooseDatetime();
+          homecontroler.chooseDateRangePicker();
         },
         leading: const Icon(
           Icons.calendar_month_outlined,
@@ -333,26 +318,27 @@ class _VisaSearchPageState extends State<VisaSearchPage> {
         title: Row(
           children: [
             Obx(() => Text(DateFormat('dd-MM-yyyy')
-                .format(homecontroler.selectedDate())
+                .format(homecontroler.dateRange.value.start)
                 .toString())),
-            // Obx(() => Text(" - " +
-            //     DateFormat("dd-MM-yyyy")
-            //         .format(homecontroler.dateRange.value.end)
-            //         .toString())),
+            Obx(() => Text(" - " +
+                DateFormat("dd-MM-yyyy")
+                    .format(homecontroler.dateRange.value.end)
+                    .toString())),
           ],
         ),
       ),
     );
   }
+
   Widget SearchButton() {
     return MaterialButton(
       height: Get.size.height * 0.06,
       minWidth: double.infinity,
       color: TColor.mainblueColor,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
       onPressed: () {},
       child: Text(
-        'Search',
+        'Search'.tr,
         style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,

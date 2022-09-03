@@ -39,7 +39,6 @@ dependencies:
   carousel_slider: ^4.1.0
   #  carousel_slider: ^1.3.0
   flutter_screenutil: ^5.3.1
-  flutter_svg: ^1.0.3
   intl: ^0.17.0
   flutter_rating_bar: ^4.0.0
   another_xlider: ^1.1.2
@@ -47,11 +46,20 @@ dependencies:
   input_slider: ^0.3.0
   url_strategy: ^0.2.0
   easy_localization: ^3.0.1
+  flutter_svg:
+  hive: ^2.2.3
+  provider: ^6.0.3
+  path_provider: ^2.0.11
+  hive_flutter: ^1.1.0
+  get_storage: ^2.0.3
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -65,10 +73,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+  generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

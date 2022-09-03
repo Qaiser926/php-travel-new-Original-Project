@@ -1,6 +1,7 @@
 
 
- Map<String, String> en ={
+ Map<String, String> en =
+ {
   // english language
 
     'appbartitle':'Explore the Nature',
